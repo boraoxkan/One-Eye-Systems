@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.title }} - One Eye Systems{% endblock %}
+
+{% block content %}
+<!-- Service Hero Section -->
+<section class="hero-section" style="background-image: url('{% if service.cover_image %}{{ service.cover_image.url }}{% else %}https://via.placeholder.com/1920x600/00d4ff/ffffff?text={{ service.title }}{% endif %}'); min-height: 60vh;">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="row">
+            <div class="col-lg-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}" class="text-white text-decoration-none">Ana Sayfa</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'home' %}#services" class="text-white text-decoration-none">Hizmetler</a>
+                        </li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">
+                            {{ service.title }}
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="display-4 fw-bold mb-4">
+                    {{ service.title }}
+                </h1>
+                <p class="lead mb-4">
+                    {{ service.short_description }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Content Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="service-content">
+                    <h2 class="h3 mb-4" style="color: #00d4ff;">Hizmet Detayları</h2>
+                    <div class="content-text fs-5 lh-lg">
+                        {{ service.detailed_content|linebreaks }}
+                    </div>
+                </div>
+                
+                <!-- Back to Services -->
+                <div class="mt-5">
+                    <a href="{% url 'home' %}#services" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Tüm Hizmetlere Dön
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 100px;">
+                    <!-- Service Icon -->
+                    {% if service.icon_class %}
+                    <div class="card mb-4 border-0 shadow-lg">
+                        <div class="card-body p-4 text-center">
+                            <i class="{{ service.icon_class }} text-primary mb-3" style="font-size: 4rem;"></i>
+                            <h5 class="card-title">{{ service.title }}</h5>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Service Image -->
+                    {% if service.cover_image %}
+                    <div class="card mb-4 border-0 shadow-lg">
+                        <img src="{{ service.cover_image.url }}" class="card-img-top" alt="{{ service.title }}" style="border-radius: 15px;">
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Contact Card -->
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3">
+                                <i class="fas fa-phone text-primary me-2"></i>
+                                İletişime Geçin
+                            </h5>
+                            <p class="card-text text-muted mb-4">
+                                Bu hizmet hakkında detaylı bilgi almak için bizimle iletişime geçin.
+                            </p>
+                            
+                            <div class="d-grid gap-2">
+                                <a href="tel:{{ site_config.phone_number }}" class="btn btn-primary">
+                                    <i class="fas fa-phone me-2"></i>
+                                    {{ site_config.phone_number }}
+                                </a>
+                                <a href="mailto:{{ site_config.contact_email }}" class="btn btn-outline-primary">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    E-posta Gönder
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Other Services -->
+                    <div class="card mt-4 border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-3">
+                                <i class="fas fa-cogs text-primary me-2"></i>
+                                Diğer Hizmetler
+                            </h5>
+                            <div class="list-group list-group-flush">
+                                {% for other_service in services %}
+                                {% if other_service.slug != service.slug %}
+                                <a href="{% url 'service_detail' other_service.slug %}" class="list-group-item list-group-item-action border-0 px-0 bg-transparent">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            {% if other_service.icon_class %}
+                                            <div class="bg-gradient rounded d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: linear-gradient(135deg, #00d4ff 0%, #0095cc 100%);">
+                                                <i class="{{ other_service.icon_class }} text-white"></i>
+                                            </div>
+                                            {% else %}
+                                            <div class="bg-gradient rounded d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: linear-gradient(135deg, #00d4ff 0%, #0095cc 100%);">
+                                                <i class="fas fa-cogs text-white"></i>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1 text-light">{{ other_service.title }}</h6>
+                                            <small class="text-muted">{{ other_service.short_description|truncatewords:6 }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section-padding bg-dark-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="display-6 fw-bold mb-4" style="color: #00d4ff;">Projeniz İçin Hazır mısınız?</h2>
+                <p class="lead fs-4 text-light mb-4">
+                    Teknoloji çözümleriniz için bugün başlayalım. Size en uygun çözümü sunmak için buradayız.
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="tel:{{ site_config.phone_number }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-phone me-2"></i>
+                        Hemen Arayın
+                    </a>
+                    <a href="mailto:{{ site_config.contact_email }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>
+                        E-posta Gönderin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
