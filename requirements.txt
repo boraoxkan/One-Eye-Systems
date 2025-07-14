@@ -1,0 +1,13 @@
+asgiref==3.9.1
+certifi==2025.7.9
+charset-normalizer==3.4.2
+Django==5.2.4
+django-admin-sortable2==2.2.8
+django-modeltranslation==0.19.16
+Faker==37.4.0
+idna==3.10
+pillow==11.3.0
+requests==2.32.4
+sqlparse==0.5.3
+tzdata==2025.2
+urllib3==2.5.0

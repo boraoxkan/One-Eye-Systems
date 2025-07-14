@@ -1,0 +1,98 @@
+/* main/static/main/css/custom.css */
+
+/* 1. Renk ve Font Değişkenleri */
+:root {
+    --dark-bg: #1a1a2e;
+    --dark-card: #16213e;
+    --accent-color: #00d1b2; /* Parlak bir turkuaz */
+    --light-text: #e0e0e0;
+    --heading-text: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-text);
+    font-weight: 600;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: #00a78f;
+    border-color: #00a78f;
+}
+
+.navbar {
+    background-color: rgba(22, 33, 62, 0.85) !important;
+    backdrop-filter: blur(10px);
+}
+
+footer {
+    background-color: var(--dark-card) !important;
+}
+
+/* 2. Kart Stilleri */
+.card {
+    background-color: var(--dark-card);
+    border: 1px solid #2a3a5e;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Çalışan Kartları için Hover Efekti */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 209, 178, 0.15);
+}
+
+/* Proje/Haber Kartları için Resim Overlay Efekti */
+.card .card-img-top {
+    transition: transform 0.3s ease;
+}
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+#hero-section {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 5rem;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-content {
+    padding-top: 2rem;
+}

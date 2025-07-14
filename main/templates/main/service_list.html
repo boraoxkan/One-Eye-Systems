@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Our Services" %} | {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">{% trans "Our Services" %}</h1>
+<div class="row g-4">
+    {% for service in services %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 text-center shadow-sm">
+            <div class="card-body d-flex flex-column">
+                <i class="{{ service.icon }} fa-3x my-3 text-primary"></i>
+                <h5 class="card-title">{{ service.name }}</h5>
+                <p class="card-text">{{ service.description }}</p>
+                <a href="{% url 'main:service_detail' service.slug %}" class="btn btn-primary mt-auto">{% trans "Learn More" %}</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>{% trans "Our services will be listed here soon." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}

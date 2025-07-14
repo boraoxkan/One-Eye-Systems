@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %} | {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<div id="hero-section">
+    <div id="particles-js"></div> <div class="hero-content text-center">
+        <h1 class="display-3">
+            <span id="typed-text"></span> </h1>
+        <p class="lead mt-3">{% trans "Innovative solutions for a digital world." %}</p>
+    </div>
+</div>
+<div class="page-content">
+    <h2 class="mb-4 text-center">{% trans "Our Featured Services" %}</h2>
+    <div class="row g-4">
+        {% for service in services %}
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="text-center mb-5">
+    <h1>{% trans "Welcome to" %} {{ site_config.site_name }}</h1>
+    <p class="lead">{% trans "Your trusted partner in success." %}</p>
+</div>
+
+<h2 class="mb-4">{% trans "Our Featured Services" %}</h2>
+<div class="row g-4">
+    {% for service in services %}
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <i class="{{ service.icon }} fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">{{ service.name }}</h5>
+                <p class="card-text">{{ service.description }}</p>
+                <a href="{% url 'main:service_detail' service.slug %}" class="btn btn-outline-primary">{% trans "Learn More" %}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

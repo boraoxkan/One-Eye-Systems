@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "News" %} | {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-5">{% trans "News & Articles" %}</h1>
+
+<div class="row g-4">
+    {% for article in news_articles %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+            <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <p class="card-text text-muted small">{{ article.published_date|date:"d F Y" }}</p>
+                <p class="card-text">{{ article.summary }}</p>
+                <a href="{% url 'main:news_detail' article.slug %}" class="btn btn-primary mt-auto">{% trans "Read More" %}</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>{% trans "There are no news articles yet." %}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

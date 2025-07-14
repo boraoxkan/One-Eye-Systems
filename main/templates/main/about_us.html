@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "About Us" %} | {{ site_config.site_name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">{{ site_config.about_us_title }}</h1>
+        <p class="lead">{{ site_config.about_us_content|linebreaks }}</p>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<h2 class="text-center mb-5">{{ site_config.team_section_title }}</h2>
+<div class="row g-4 justify-content-center">
+    {% for employee in employees %}
+    <div class="col-sm-6 col-md-4 col-lg-3 employee-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00">
+        <div class="card text-center h-100 shadow-sm">
+            <img src="{{ employee.photo.url }}" class="card-img-top" alt="{{ employee.full_name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ employee.full_name }}</h5>
+                <p class="card-text text-muted">{{ employee.title }}</p>
+                {% if employee.linkedin_url %}
+                    <a href="{{ employee.linkedin_url }}" target="_blank" class="btn btn-primary btn-sm">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">{% trans "Our team information will be updated soon." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}
